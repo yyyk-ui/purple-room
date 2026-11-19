@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#eeebf3">
+  <title>Purple Room 💜</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      background: #eeebf3;
+      color: #393442;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    .app {
+      width: 100%;
+      max-width: 520px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: #f8f7fa;
+    }
+    header {
+      padding: 28px 22px 18px;
+      background: #eeebf3;
+      border-bottom: 1px solid #e3dfe9;
+    }
+    header h1 { margin: 0; font-size: 22px; font-weight: 600; }
+    header p { margin: 7px 0 0; color: #898292; font-size: 13px; }
+    #chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .message {
+      max-width: 82%;
+      padding: 12px 15px;
+      border-radius: 18px;
+      line-height: 1.6;
+      font-size: 15px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    .assistant {
+      align-self: flex-start;
+      background: #ece8f1;
+      border-bottom-left-radius: 5px;
+    }
+    .user {
+      align-self: flex-end;
+      background: #dcd3e8;
+      border-bottom-right-radius: 5px;
+    }
+    form {
+      display: flex;
+      gap: 9px;
+      padding: 14px;
+      padding-bottom: max(18px, env(safe-area-inset-bottom));
+      border-top: 1px solid #e8e4ec;
+      background: #fff;
+    }
+    input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: none;
+      border-radius: 22px;
+      background: #f1eff4;
+      padding: 13px 16px;
+      font-size: 15px;
+    }
+    button {
+      border: 0;
+      border-radius: 22px;
+      background: #887b9c;
+      color: white;
+      padding: 0 19px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Purple Room 💜</h1>
+      <p>A little space of our own.</p>
+    </header>
+    <section id="chat">
+      <div class="message assistant">欢迎来到 Purple Room。
+
+这里是一个属于你的私人小空间。今天想聊点什么？</div>
+    </section>
+    <form id="form">
+      <input id="input" placeholder="说点什么吧……" autocomplete="off">
+      <button type="submit">发送</button>
+    </form>
+  </main>
+  <script>
+    const chat = document.getElementById("chat");
+    const form = document.getElementById("form");
+    const input = document.getElementById("input");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      const value = input.value.trim();
+      if (!value) return;
+      const message = document.createElement("div");
+      message.className = "message user";
+      message.textContent = value;
+      chat.appendChild(message);
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    });
+  </script>
+</body>
+</html>
